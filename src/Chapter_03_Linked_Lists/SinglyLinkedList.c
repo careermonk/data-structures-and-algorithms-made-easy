@@ -4,7 +4,7 @@ struct listNode{
 	int data;
 	struct listNode *next;
 };
-int listLength(struct listNode *head){
+int singlyListLength(struct listNode *head){
 	int count;
 	struct listNode *current=head;
 	while(current!=NULL){
@@ -13,7 +13,7 @@ int listLength(struct listNode *head){
 	}
 	return count;
 }
-void insertInLinkedList(struct listNode **head, int data, int pos){
+void insertInSinglyLinkedList(struct listNode **head, int data, int pos){
 	int k=1;
 	struct listNode *q,*p;
 	struct listNode *newNode=(struct listNode*)malloc(sizeof(struct listNode));
@@ -64,20 +64,20 @@ void deleteNodeFromLinkedList(struct listNode **head, int pos){
 		}
 	}
 }
-void printList(struct listNode *head){
+void printSLList(struct listNode *head){
 	while(head!=NULL){
 		printf("%d ",head->data);
 		head=head->next;
 	}
 	printf("\n");
 }
-int main(){
+int SinglyLinkedList_test(){
 	struct listNode *head=NULL;
-	insertInLinkedList(&head,5,5);
-	insertInLinkedList(&head,2,5);
-	printf("Elements in List:%d\n",listLength(head));
-	printList(head);
+	insertInSinglyLinkedList(&head,5,5);
+	insertInSinglyLinkedList(&head,2,5);
+	printf("Elements in List:%d\n",singlyListLength(head));
+	printSLList(head);
 	deleteNodeFromLinkedList(&head,1);
-	printList(head);
+	printSLList(head);
 	return 0;
 }

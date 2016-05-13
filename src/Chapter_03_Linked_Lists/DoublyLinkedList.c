@@ -5,7 +5,7 @@ struct listNode{
 	struct listNode *prev;
 	struct listNode *next;
 };
-int listLength(struct listNode *head){
+int doublyListLength(struct listNode *head){
 	int count;
 	while(head!=NULL){
 		count++;
@@ -45,7 +45,7 @@ void insertInLinkedList(struct listNode **head, int data, int pos){
 		}
 	}
 }
-void deleteNodeFromLinkedList(struct listNode **head, int pos){
+void deleteNodeFromDLLinkedList(struct listNode **head, int pos){
 	int k=1;
 	struct listNode *temp, *q, *p;
 	if(!head){
@@ -79,24 +79,24 @@ void deleteNodeFromLinkedList(struct listNode **head, int pos){
 		free(temp);
 	}
 }
-void printList(struct listNode *head){
+void printDLList(struct listNode *head){
 	while(head!=NULL){
 		printf("%d ",head->data);
 		head=head->next;
 	}
 	printf("\n");
 }
-int main(){
+int DoublyLinkedList_test(){
 	struct listNode *head;
-	printf("Elements in list are :%d\n",listLength(head));
-	printList(head);
+	printf("Elements in list are :%d\n",doublyListLength(head));
+	printDLList(head);
 	insertInLinkedList(&head,2,3);
 	insertInLinkedList(&head,5,3);
 	insertInLinkedList(&head,9,1);
 	insertInLinkedList(&head,10,3);
-	printf("Elements in list are :%d\n",listLength(head));
-	printList(head);
-	deleteNodeFromLinkedList(&head,3);
-	printList(head);
+	printf("Elements in list are :%d\n",doublyListLength(head));
+	printDLList(head);
+	deleteNodeFromDLLinkedList(&head,3);
+	printDLList(head);
 	return 0;
 }

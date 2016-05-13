@@ -23,7 +23,7 @@ int functionWithBreak(int n){
 	}
     printf("%d\n", count);
 }
-int main(){
+int functionWithBreak_test(){
 	int n = 20;
 	functionWithBreak(n);
 }
