@@ -18,7 +18,7 @@
  * 
  */
 int main(int argc, char** argv) {
-    countingNumberofOneswithTogglingApproach_test();
+    countingNumberofOneswithPreprocessing_test();
     return (EXIT_SUCCESS);
 }
 
