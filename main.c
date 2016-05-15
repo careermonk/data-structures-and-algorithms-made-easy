@@ -18,7 +18,7 @@
  * 
  */
 int main(int argc, char** argv) {
-    countingNumberofOneswithPreprocessing_test();
+    binarySearch_test();
     return (EXIT_SUCCESS);
 }
 
