@@ -18,7 +18,7 @@
  * 
  */
 int main(int argc, char** argv) {
-    binarySearch_test();
+    interpolationSearch_test();
     return (EXIT_SUCCESS);
 }
 

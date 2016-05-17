@@ -50,3 +50,4 @@ void binarySearch_test(){
     printf("\nElement %d is at location: %d (-1 indicates not present in array)", data, binarySearchRecursive(A, 0, n-1, data));
 
 }
+
