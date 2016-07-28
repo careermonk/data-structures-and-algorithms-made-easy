@@ -18,7 +18,7 @@
  * 
  */
 int main(int argc, char** argv) {
-    testSimpleArrayStack();
+    testPostOrder();
     return (EXIT_SUCCESS);
 }
 

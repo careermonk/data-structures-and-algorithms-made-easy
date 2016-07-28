@@ -6,7 +6,7 @@
 #Warranty          : This software is provided "as is" without any 
 #                    warranty; without even the implied warranty of 
 #                    merchantability or fitness for a particular purpose.*/
-
+/*
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
@@ -86,3 +86,4 @@ void testDynamicStack(){
     }
     DeleteDynStack(s);
 }
+*/
