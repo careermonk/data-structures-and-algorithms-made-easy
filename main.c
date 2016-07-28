@@ -18,7 +18,7 @@
  * 
  */
 int main(int argc, char** argv) {
-    testPreOrder();
+    testDynamicStack();
     return (EXIT_SUCCESS);
 }
 
