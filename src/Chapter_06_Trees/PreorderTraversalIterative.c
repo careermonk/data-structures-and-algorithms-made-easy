@@ -19,7 +19,7 @@ void preOrderNonRecursive(struct BinaryTreeNode *root){
       while(1)  {
             while(root) {
                 //Process current node
-                printf("%d\n", root->data);
+                printf("%d ", root->data);
                 Push(S, root);
                 //If left subtree exists, add to stack
                 root = root->left;

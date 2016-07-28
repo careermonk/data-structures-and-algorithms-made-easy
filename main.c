@@ -18,7 +18,7 @@
  * 
  */
 int main(int argc, char** argv) {
-    testInOrderIterative();
+    testPostOrderIterative();
     return (EXIT_SUCCESS);
 }
 
