@@ -11,17 +11,19 @@
 #include <stdlib.h>
 #include <limits.h>
 
-struct DynArrayStack {
+#define MAXSIZE 5
+
+struct SimpleArrayStack {
     int top;
     int capacity;
     int *array;
 };
 
-struct DynArrayStack *CreateStack(){
-    struct DynArrayStack *S = malloc(sizeof(struct DynArrayStack));  
+struct SimpleArrayStack *CreateStack(){
+    struct SimpleArrayStack *S = malloc(sizeof(struct SimpleArrayStack));  
     if(!S) 
      return NULL;
-    S->capacity = 1;
+    S->capacity = MAXSIZE;
     S->top = -1;
     S->array = malloc(S->capacity * sizeof(int));	// allocate an array of size 1 initially
 
@@ -30,42 +32,38 @@ struct DynArrayStack *CreateStack(){
     return S;
 }
 
-int IsFullStack(struct DynArrayStack *S){
+int IsFullStack(struct SimpleArrayStack *S){
     return (S->top == S->capacity-1);
 }
 
-void DoubleStack(struct DynArrayStack *S){
-    S->capacity *= 2;
-    S->array = realloc(S->array, S->capacity * sizeof(int));
-}
-
-void Push(struct DynArrayStack *S, int x){
+void Push(struct SimpleArrayStack *S, int x){
     // No overflow in this implementation
     if(IsFullStack(S))   
-     DoubleStack(S); 
+     printf("Overflow: Stack full");
 
     S->array[++S->top] = x;
 }
 
-int IsEmptyStack(struct DynArrayStack *S){
+int IsEmptyStack(struct SimpleArrayStack *S){
     return S->top == -1;
 }
 
-int Top(struct DynArrayStack *S){
+int Top(struct SimpleArrayStack *S){
     if(IsEmptyStack(S))     
      return INT_MIN;
 
     return S->array[S->top];
 }
 
-int Pop(struct DynArrayStack *S){
-    if(IsEmptyStack(S))    
-     return INT_MIN;
-
+int Pop(struct SimpleArrayStack *S){
+    if(IsEmptyStack(S)){  
+        printf("Underflow: Stack empty");
+        return INT_MIN;
+    }
     return S->array[S->top--];
 }
 
-void DeleteDynStack(struct DynArrayStack *S){
+void DeleteStack(struct SimpleArrayStack *S){
     if(S) {
         if(S->array) 
             free(S->array);
@@ -73,8 +71,8 @@ void DeleteDynStack(struct DynArrayStack *S){
     }
 }
 
-void testDynamicStack(){
-    struct DynArrayStack *s = CreateStack();
+void testSimpleArrayStack(){
+    struct SimpleArrayStack *s = CreateStack();
     Push(s, 10);
     Push(s, 1);
     Push(s, 11);
@@ -84,5 +82,5 @@ void testDynamicStack(){
     while(!IsEmptyStack(s)){
         printf("%d\n", Pop(s));
     }
-    DeleteDynStack(s);
+    DeleteStack(s);
 }

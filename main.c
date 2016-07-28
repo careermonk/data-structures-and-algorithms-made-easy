@@ -18,7 +18,7 @@
  * 
  */
 int main(int argc, char** argv) {
-    testPreOrderNonRecursive();
+    testSimpleArrayStack();
     return (EXIT_SUCCESS);
 }
 
