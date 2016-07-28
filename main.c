@@ -18,7 +18,7 @@
  * 
  */
 int main(int argc, char** argv) {
-    interpolationSearch_test();
+    testPreOrder();
     return (EXIT_SUCCESS);
 }
 
