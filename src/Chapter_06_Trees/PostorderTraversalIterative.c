@@ -15,7 +15,7 @@
 struct SimpleArrayStack {
     int top;
     int capacity;
-    unsigned int *addresses;    //Assuming we are storing node addresses in array
+    unsigned int *addresses;    //storing node addresses in array
 };
 struct BinaryTreeNode{
     int data;

@@ -10,10 +10,8 @@
 int countingNumberofOneswithTogglingApproach(unsigned int n){
     int count =0;
     while(n){
-        if(n%2 == 1){
-            count++;
-        }
-        n=n/2;
+        n = n & (n-1);
+        count++;
     }
     return count;
 }

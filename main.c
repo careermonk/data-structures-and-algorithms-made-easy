@@ -18,7 +18,7 @@
  * 
  */
 int main(int argc, char** argv) {
-    testPostOrderIterative();
+    countingNumberofOnesIn1toN_test();
     return (EXIT_SUCCESS);
 }
 
