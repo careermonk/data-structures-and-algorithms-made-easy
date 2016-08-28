@@ -1,7 +1,7 @@
 Data Structures And Algorithms Made Easy
 ----------------------------------------
 
-Copyright (c) Dec 21, 2014 CareerMonk Publications and others.
+Copyright (c) August 28, 2016 CareerMonk Publications and others.
 
 E-Mail                : info@careermonk.com
 
@@ -9,7 +9,7 @@ Last modification by  : Narasimha Karumanchi
 
 Book Title            : Data Structures And Algorithms Made Easy
 
-ISBN                  : 9780615459813
+ISBN                  : 9788193245279
 
 Warranty              : This software is provided "as is" without any warranty; without even the implied warranty of merchantability or fitness for a particular purpose.
 
