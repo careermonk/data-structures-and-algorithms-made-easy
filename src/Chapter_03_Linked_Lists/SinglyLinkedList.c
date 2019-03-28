@@ -5,7 +5,7 @@ struct listNode{
 	struct listNode *next;
 };
 int singlyListLength(struct listNode *head){
-	int count;
+	int count=0;
 	struct listNode *current=head;
 	while(current!=NULL){
 		count++;
