@@ -7,82 +7,103 @@
 #                    warranty; without even the implied warranty of 
 #                    merchantability or fitness for a particular purpose.*/
 
-#include <stdio.h>
+#include<stdio.h>
 #include <stdlib.h>
 #include <limits.h>
 
-struct DynArrayStack {
+struct Stack {
     int top;
     int capacity;
     int *array;
 };
 
-struct DynArrayStack *CreateStack(){
-    struct DynArrayStack *S = malloc(sizeof(struct DynArrayStack));  
+struct Stack *createStack(int capacity) {
+    struct Stack *S = malloc(sizeof(struct Stack));
     if(!S) 
-     return NULL;
-    S->capacity = 1;
+        return NULL;
+    S->capacity = capacity;
     S->top = -1;
-    S->array = malloc(S->capacity * sizeof(int));	// allocate an array of size 1 initially
-
+    S->array= malloc(S->capacity * sizeof(int));
     if(!S->array) 
         return NULL;
     return S;
 }
 
-int IsFullStack(struct DynArrayStack *S){
-    return (S->top == S->capacity-1);
+int isEmpty(struct Stack *S) {
+    return (S->top == -1);  	// if the condition is true then 1 is returned else 0 is returned
 }
 
-void DoubleStack(struct DynArrayStack *S){
+int size(struct Stack *S) {
+    return (S->top + 1);  
+}
+
+int isFull(struct Stack *S){
+    //if the condition is true then 1 is returned else 0 is returned
+    return (S->top == S->capacity - 1); 
+}
+
+void doubleStack(struct Stack *S){
     S->capacity *= 2;
     S->array = realloc(S->array, S->capacity * sizeof(int));
 }
 
-void Push(struct DynArrayStack *S, int x){
-    // No overflow in this implementation
-    if(IsFullStack(S))   
-     DoubleStack(S); 
 
-    S->array[++S->top] = x;
+void push(struct Stack *S, int data){
+    if(isFull(S)) 
+        doubleStack(S); 
+    S->array[++S->top] = data;   
 }
 
-int IsEmptyStack(struct DynArrayStack *S){
-    return S->top == -1;
-}
-
-int Top(struct DynArrayStack *S){
-    if(IsEmptyStack(S))     
-     return INT_MIN;
-
-    return S->array[S->top];
-}
-
-int Pop(struct DynArrayStack *S){
-    if(IsEmptyStack(S))    
-     return INT_MIN;
-
-    return S->array[S->top--];
-}
-
-void DeleteDynStack(struct DynArrayStack *S){
-    if(S) {
-        if(S->array) 
-            free(S->array);
-        free(S);
+int pop(struct Stack *S){
+    /* S->top == - 1 indicates empty stack*/
+    if(isEmpty(S)){	
+        printf("Stack is Empty\n");
+        return INT_MIN;
     }
+    else /* Removing element from  ‘top’ of the array and reducing ‘top’ by 1*/
+        return (S->array[S->top--]); 
 }
 
-void testDynamicStack(){
-    struct DynArrayStack *s = CreateStack();
-    Push(s, 10);
-    Push(s, 1);
-    Push(s, 11);
-    Push(s, 2);
-    Push(s, 10);
-    Push(s, 50);
-    while(!IsEmptyStack(s)){
-        printf("%d\n", Pop(s));
+int peek(struct Stack *S){
+    /* S->top == - 1 indicates empty stack*/
+    if(isEmpty(S)){	
+        printf("Stack is Empty");
+        return INT_MIN;;
     }
-    DeleteDynStack(s);
+    else 
+        return (S->array[S->top]); 
+}
+
+void deleteStack(struct Stack *S){
+    if(S) {     
+        if(S->array)  
+             free(S->array);
+                  free(S);
+      }
+}
+
+
+int main(){
+    int i = 0, capacity = 5;
+    // create a stack of capacity 5
+    struct Stack *stk = createStack(capacity);
+
+    for(i = 0; i <= 2 * capacity; i++){
+        push(stk, i);
+    }
+
+    printf("Top element is %d\n", peek(stk));
+    printf("Stack size is %d\n", size(stk));
+
+    for (i = 0; i <= capacity; i++){
+        printf("Popped element is %d\n", pop(stk));
+    }
+
+    if (isEmpty(stk))
+        printf("Stack is empty");
+    else
+        printf("Stack is not empty");
+
+    deleteStack(stk);
+    return 0;
 }
