@@ -139,6 +139,14 @@ struct AdvancedStack * createAdvancedStack(int capacity){
      return S;
 }
 
+void deleteStackA(struct AdvancedStack *S){
+    if(S) {     
+        deleteStackA(S->elementStack);
+        deleteStackA(S->minStack);
+        free(S);
+    }
+}
+
 int main(){
     int i = 0, capacity = 5;
     // create a stack of capacity 5
@@ -160,6 +168,6 @@ int main(){
     else
         printf("Stack is not empty");
 
-    deleteStack(stk);
+    deleteStackA(stk);
     return 0;
 }
