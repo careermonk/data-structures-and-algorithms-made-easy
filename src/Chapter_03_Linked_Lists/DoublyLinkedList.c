@@ -141,7 +141,7 @@ void deleteLastNode(struct DLLNode **head) {
     while (current->next != NULL){
         current = current->next;
     }
-	temp = current->prev;
+    temp = current->prev;
     temp->next = current->next;
     free(current);
     return;
@@ -156,7 +156,7 @@ void deleteFrontNode (struct DLLNode **head) {
     }
     temp = *head;
     *head = (*head)->next;
-
+    (*head)->prev = NULL;
     free(temp);
     return;
 }
