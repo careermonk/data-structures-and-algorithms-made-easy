@@ -1,12 +1,3 @@
-/*Copyright (c) 2016 CareerMonk Publications and others.
-#E-Mail            : info@careermonk.com 
-#Creation Date     : 2008-01-10 06:15:46 
-#Created by        : Narasimha Karumanchi 
-#Book Title        : Data Structures And Algorithms Made Easy
-#Warranty          : This software is provided "as is" without any 
-#                    warranty; without even the implied warranty of 
-#                    merchantability or fitness for a particular purpose.*/
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -89,6 +80,39 @@ void insertAtEndInCLL(struct CLLNode **head, int data){
     }
 }
 
+void deleteLastNodeFromCLL (struct CLLNode **head) {
+    struct CLLNode *temp = *head, *current = *head;
+
+    if(*head == NULL) {
+        printf( "List empty!");  
+        return;
+    }
+    while (current->next != *head) {
+        temp = current;
+        current = current->next;
+    }
+    temp->next = current->next;
+    free(current);
+    return;
+}
+void deleteFrontNodeFromCLL (struct CLLNode **head) {
+    struct CLLNode *temp = *head;
+    struct CLLNode *current = *head;
+
+    if(*head == NULL) {
+        printf("List empty");  
+        return;
+    }
+
+    while (current->next != *head) 
+        current = current->next;
+
+    current->next = (*head)->next;
+    *head = (*head)->next;
+
+    free(temp);
+    return;
+}
 
 
 int main(){
@@ -103,6 +127,12 @@ int main(){
     insertAtEndInCLL(&head, 40);
     insertAtEndInCLL(&head, 50);
     insertAtEndInCLL(&head, 60);
+    printf("List length is %d \n",length(head));
+    printList(head);
+    deleteLastNodeFromCLL(&head);
+    printf("List length is %d \n",length(head));
+    printList(head);
+    deleteFrontNodeFromCLL(&head);
     printf("List length is %d \n",length(head));
     printList(head);
     return 0;
