@@ -52,21 +52,20 @@ int getLength(struct ListNode *head){
 struct ListNode * middleNode(struct ListNode *head){
     /* Input Validation */
     if(head == NULL){
-        printf("Error: Invalid Input !!!!\n");
+        printf("Error: List is empty!\n");
         return NULL;
     }
     struct ListNode *slow, *fast;
     slow = fast = head;
-    /* In every iteration, slow pointer will move one nede whereas
-     fast pointer will move two ListNode. When fast pointer reaches 
-     last ListNode then slow pointer will be pointing to middle ListNode */
+    /* In every iteration, slow pointer will move one node whereas fast pointer will move two ListNodes.
+     When fast pointer reaches last ListNode then slow pointer will be pointing to middle ListNode */
     while(fast != NULL && fast->next != NULL) {
         fast = fast->next->next;
         slow = slow->next;
     }
-     
     return slow;
 }
+
 /*
 Prints a linked list from head ListNode till tail ListNode 
 */
