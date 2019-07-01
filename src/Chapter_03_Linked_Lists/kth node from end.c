@@ -49,18 +49,18 @@ int getLength(struct ListNode *head){
     return length;
 }
  
-struct ListNode* kthNodeFromEnd(struct ListNode* head, int n){
+struct ListNode* kthNodeFromEnd(struct ListNode* head, int k){
     struct ListNode *pTemp, *kthNode;
     int i;
     pTemp = kthNode = head;
-    /* N should be less than length of Linked List */
-    if(n > getLength(head)){
-        printf("Error : n is greater than length of Linked List\n");
+    /* k should be less than length of Linked List */
+    if(k > getLength(head)){
+        printf("Error : k is greater than length of linked list\n");
         return NULL;
     }
     /* Move pTemp pointer k-1 ListNodes. This will create 
     a difference of k-1 ListNodes between pTemp and kthNode */
-    for(i = 0; i < n-1; i++){
+    for(i = 0; i < k-1; i++){
         pTemp = pTemp->next;
     }
     /* Now, move both pointers together till pTemp reaches 
@@ -99,6 +99,6 @@ int main() {
     printf("\nLinked List\n");
     printLinkedList(head);
     kthNode = kthNodeFromEnd(head, 3);
-    printf("kth node from end in the linked list is %d", kthNode->data);
+    printf("\nkth node from end in the linked list is %d", kthNode->data);
     return 0;
 }
