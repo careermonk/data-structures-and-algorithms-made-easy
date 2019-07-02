@@ -82,28 +82,70 @@ void push(struct ListNode** head, int data){
 	*head = newNode;
 }
 
-// Solution uses the temporary dummy node to build up the result list
-struct ListNode  *intersection(struct ListNode  *list1, struct ListNode  *list2) {
-  struct ListNode  dummy;
-  struct ListNode  *head = &dummy;
-  dummy.next = NULL;
-  while (list1 != NULL && list2 != NULL) {
-    if (list1->data == list2->data) {
-      push((&head->next), list1->data); // Copy common element.
-      list1 = list1->next;
-      list2 = list2->next;
-      head = head->next;
-    } else if (list1->data > list2->data) {
-      list2 = list2->next;
-    } else { // list1->data < list2->data
-      list1 = list1->next;
+// Solution to give common elements in the reverse
+struct ListNode  * intersection1(struct ListNode  *list1, struct ListNode  *list2) {
+    struct ListNode  *head = NULL;
+    while (list1 != NULL && list2 != NULL) {
+        if (list1->data == list2->data) {
+            push(&head, list1->data); // Copy common element.
+            list1 = list1->next;
+            list2 = list2->next;
+        } else if (list1->data > list2->data) {
+            list2 = list2->next;
+        } else { // list1->data < list2->data
+            list1 = list1->next;
+        }
     }
-  }
-  return dummy.next;
+    return head;
+}
+
+// Solution to give common elements in the reverse
+struct ListNode  * intersection2(struct ListNode  *list1, struct ListNode  *list2) {
+    struct ListNode  *head = NULL;
+    struct ListNode* tail;
+    while (list1 != NULL && list2 != NULL) {
+        if (list1->data == list2->data) {
+            if (head == NULL) {
+              push(&head, list1->data);
+              tail = head;
+            }
+            else{
+              push(&tail->next, list1->data);
+              tail = tail->next;
+            }
+            list1 = list1->next;
+            list2 = list2->next;
+        } else if (list1->data > list2->data) {
+            list2 = list2->next;
+        } else { // list1->data < list2->data
+            list1 = list1->next;
+        }
+    }
+    return head;
+}
+
+// Solution uses the temporary dummy node to build up the result list
+struct ListNode  * intersection3(struct ListNode  *list1, struct ListNode  *list2) {
+    struct ListNode  dummy;
+    struct ListNode  *tail = &dummy;
+    dummy.next = NULL;
+    while (list1 != NULL && list2 != NULL) {
+        if (list1->data == list2->data) {
+            push((&tail->next), list1->data); // Copy common element.
+            list1 = list1->next;
+            list2 = list2->next;
+            tail = tail->next;
+        } else if (list1->data > list2->data) {
+            list2 = list2->next;
+        } else { // list1->data < list2->data
+            list1 = list1->next;
+        }
+    }
+    return dummy.next;
 }
 
 int main() {
-  struct ListNode *intersectionNodes;
+  struct ListNode *commonNodes;
   initialize();
   /* Creating a linked List*/
   insert(&head1, 3);
@@ -132,10 +174,22 @@ int main() {
   head2 = reverseLinkedList(head2);
   printf("\nLinked List\n");
   printLinkedList(head2);
-  intersectionNodes = intersection(head1, head2);
+  commonNodes =  intersection1(head1, head2);
   printf("\nCommon elements\n");
-  while (intersectionNodes != NULL) {
-      printf(" %d-->", intersectionNodes->data);
-      intersectionNodes  = intersectionNodes->next;
+  while (commonNodes != NULL) {
+      printf(" %d-->", commonNodes->data);
+      commonNodes  = commonNodes->next;
+  }
+  commonNodes =  intersection2(head1, head2);
+  printf("\nCommon elements\n");
+  while (commonNodes != NULL) {
+      printf(" %d-->", commonNodes->data);
+      commonNodes  = commonNodes->next;
+  }
+  commonNodes =  intersection3(head1, head2);
+  printf("\nCommon elements\n");
+  while (commonNodes != NULL) {
+      printf(" %d-->", commonNodes->data);
+      commonNodes  = commonNodes->next;
   }
 }
