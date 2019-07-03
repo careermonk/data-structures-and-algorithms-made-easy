@@ -13,46 +13,59 @@
 struct ListNode {
     int data;
     struct ListNode *next;
-} *front, *rear;
+};
+
+struct Queue {
+    struct ListNode *front;
+    struct ListNode *rear;
+};
 
 /* Create an empty queue */
-void initialize() {
-    front = rear = NULL;
+struct Queue *CreateQueue() {
+    struct Queue *Q;
+    struct ListNode *temp;
+    Q = malloc(sizeof(struct Queue));
+    if(!Q)
+         return NULL;
+
+    temp = malloc(sizeof(struct ListNode));
+    Q->front = Q->rear = NULL;
+    return Q;
 }
 
 /* Returns queue size */
-int size() {
-    struct ListNode *temp = front;
+int size(struct Queue *Q) {
+    struct ListNode *temp = Q->front;
     int count = 0;
 
-    if(front == NULL && rear == NULL)
+    if(Q->front == NULL && Q->rear == NULL)
         return 0;
 
-    while(temp != rear){
+    while(temp != Q->rear){
         count++;
         temp = temp->next;
     }
-    if(temp == rear)
+    if(temp == Q->rear)
         count++;
 
     return count;
 }
 
 /* Returns Frnt Element of the Queue */
-int frontElement() {
-    return front->data;
+int frontElement(struct Queue *Q) {
+    return Q->front->data;
 }
 
 /* Returns the Rear Element of the Queue */
-int rearElement() {
-    return rear->data;
+int rearElement(struct Queue *Q) {
+    return Q->rear->data;
 }
 
 /*
 Check's if Queue is empty or not
 */
-void isEmpty() {
-    if (front == NULL && rear == NULL)
+void isEmpty(struct Queue *Q) {
+    if (Q->front == NULL && Q->rear == NULL)
         printf("Empty Queue\n");
     else
         printf("Queue is not Empty\n");
@@ -60,33 +73,33 @@ void isEmpty() {
 /*
 Adding elements in Queue
 */
-void enqueue(int num) {
+void enqueue(struct Queue *Q, int num) {
     struct ListNode *temp;
     temp = (struct ListNode *)malloc(sizeof(struct ListNode));
     temp->data = num;
     temp->next = NULL;
 
-    if (rear == NULL) {
-        front = rear = temp;
+    if (Q->rear == NULL) {
+        Q->front = Q->rear = temp;
     } else {
-        rear->next = temp;
-        rear = temp;
+        Q->rear->next = temp;
+        Q->rear = temp;
     }
 }
 
 /*
 Removes an element from front of the queue
 */
-void dequeue() {
+void dequeue(struct Queue *Q) {
     struct ListNode *temp;
-    if (front == NULL) {
+    if (Q->front == NULL) {
         printf("\nQueue is Empty \n");
         return;
     } else {
-        temp = front;
-        front = front->next;
-        if(front == NULL){
-            rear = NULL;
+        temp = Q->front;
+        Q->front = Q->front->next;
+        if(Q->front == NULL){
+            Q->rear = NULL;
         }
         printf("Removed Element : %d\n", temp->data);
         free(temp);
@@ -96,10 +109,10 @@ void dequeue() {
 /*
  Print's Queue
 */
-void printQueue() {
-    struct ListNode *temp = front;
+void printQueue(struct Queue *Q) {
+    struct ListNode *temp = Q->front;
 
-    if ((front == NULL) && (rear == NULL)) {
+    if ((Q->front == NULL) && (Q->rear == NULL)) {
         printf("Queue is Empty\n");
         return;
     }
@@ -112,51 +125,52 @@ void printQueue() {
     }
 }
 
-void deleteQueue() {
+void deleteQueue(struct Queue *Q) {
      struct ListNode *temp;
-     while(front) {
-          temp = front;
+     while(Q->front) {
+          temp = Q->front;
           printf("Element being deleted: %d\n", temp->data);
-          front = front->next;
+          Q->front = Q->front->next;
           free(temp);
      }
-     free(front);
+     free(Q);
 }
 
 
 int main() {
     /* Initializing Queue */
-    initialize();
+    struct Queue *Q;
+    Q = CreateQueue();
     /* Adding elements in Queue */
-    enqueue(1);
-    enqueue(3);
-    enqueue(7);
-    enqueue(5);
-    enqueue(10);
+    enqueue(Q, 1);
+    enqueue(Q, 3);
+    enqueue(Q, 7);
+    enqueue(Q, 5);
+    enqueue(Q, 10);
     /* Printing Queue */
-    printQueue();
+    printQueue(Q);
     /* Printing size of Queue */
-    printf("\nSize of Queue : %d\n", size());
+    printf("\nSize of Queue : %d\n", size(Q));
     /* Printing front and rear element of Queue */
-    printf("Front Element : %d\n", frontElement());
-    printf("Rear Element : %d\n", rearElement());
+    printf("Front Element : %d\n", frontElement(Q));
+    printf("Rear Element : %d\n", rearElement(Q));
     /* Removing Element from Queue */
-    dequeue();
-    dequeue();
-    dequeue();
-    dequeue();
-    dequeue();
-    dequeue();
-    enqueue(15);
-    enqueue(100);
+    dequeue(Q);
+    dequeue(Q);
+    dequeue(Q);
+    dequeue(Q);
+    dequeue(Q);
+    dequeue(Q);
+    enqueue(Q, 15);
+    enqueue(Q, 100);
     /* Printing Queue */
-    printQueue();
+    printQueue(Q);
     /* Printing size of Queue */
-    printf("\nSize of Queue : %d\n", size());
+    printf("\nSize of Queue : %d\n", size(Q));
     /* Printing front and rear element of Queue */
-    printf("Front Element : %d\n", frontElement());
-    printf("Rear Element : %d\n", rearElement());
+    printf("Front Element : %d\n", frontElement(Q));
+    printf("Rear Element : %d\n", rearElement(Q));
     /* Removing Queue */
-    deleteQueue();
+    deleteQueue(Q);
     return 0;
 }
