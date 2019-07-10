@@ -104,8 +104,12 @@ void removeEdge(struct graph* G, const struct edge E){
 
 void destroyGraph(struct graph* G){ // to free memory
     if (G){
-      if (G->adjMatrix)
+      if (G->adjMatrix){
+          int i;
+          for (i = 0; i < G->V; i++)
+             free(G->adjMatrix[i]);
           free(G->adjMatrix);
+      }
       free(G);
     }
 }
