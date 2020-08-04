@@ -180,7 +180,7 @@ void delete(struct DLLNode **head, int position) {
         temp = temp->next;
         k++;
     }
-    if(k < position-1){
+    if(k < position){
         printf("Desired position does not exist\n");
         return;
     }
@@ -231,6 +231,10 @@ int main(){
     printList(head);
     printf("\n");
     delete(&head, 2);
+    printf("List length is %d \n",length(head));
+    printList(head);
+    printf("\n");
+    delete(&head, 6);
     printf("List length is %d \n",length(head));
     printList(head);
     printf("\n");
