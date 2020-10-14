@@ -26,8 +26,10 @@ struct SimpleArrayStack *CreateStack(){
     S->top = -1;
     S->array = malloc(S->capacity * sizeof(int));	// allocate an array of size 1 initially
 
-    if(!S->array) 
+    if(!S->array){
+        free(S);
         return NULL;
+    }
     return S;
 }
 
