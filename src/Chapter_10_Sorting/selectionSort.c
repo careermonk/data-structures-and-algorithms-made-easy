@@ -10,32 +10,51 @@
 // Bubble Sort in C
 #include <stdio.h>
 
-void selectionSort(int data[], int size) {
-      int i, j, min, temp;
-      for (i = 0; i < size - 1; i++) {
-            min = i;
-            for (j = i+1; j < size; j++) {
-                  if(data [j] < data [min])
-                        min = j;
-            }
-            // swap elements
-            temp = data[min];
-            data[min] = data[i];
-            data[i] = temp;
-      }
-}
+int MinIndex(int A[], int N)
+{
+    int min = A[0], minindex = 0;
 
-void printArray(int data[], int size){
-    for(int i=0; i<size; ++i){
-        printf("%d  ", data[i]);
+    for (int i = 1; i < N; i++)
+    {
+        if (min > A[i])
+        {
+            min = A[i];
+            minindex = i;
+        }
     }
-    printf("\n");
+    return minindex;
 }
 
-int main(){
-    int data[] = {-4, 35, 1, 10, -8};
-    int size = sizeof(data)/sizeof(data[0]);
-    selectionSort(data, size);
-    printf("Sorted array in ascending order:\n");
-    printArray(data, size);
+void sort(int A[], int N)
+{
+    int t, minindex = MinIndex(A, N);
+    
+    if (N > 1)
+    {
+        t = A[0];
+        A[0] = A[minindex];
+        A[minindex] = t;
+
+        sort(&A[1], N - 1);
+    }
+}
+
+void main()
+{
+    int N;
+
+    printf("Enter N numbers to sort: ");
+    scanf("%d", &N);
+
+    int A[N];
+
+    for (int i = 0; i < N; i++)
+        scanf("%d", &A[i]);
+
+    sort(A, N);
+
+    for (int i = 0; i < N; i++)
+        printf("%d ", A[i]);
+
+    printf("\n");
 }
