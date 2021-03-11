@@ -81,8 +81,8 @@ void deleteStack(struct Stack *stk){
     p = stk->top;
     while( p) {
         temp = p->next;
-        p = p->next;
-        free(temp);
+        free(p);
+        p = temp;
     }
     free(stk);
  }
