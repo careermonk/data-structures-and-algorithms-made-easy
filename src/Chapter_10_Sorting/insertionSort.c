@@ -15,7 +15,7 @@ void insertionSort(int data[], int size) {
     for (i = 1; i <= size - 1; i++) {
         key = data[i];
         j = i;
-        while (data[j-1] > key && j >= 1) {
+        while (j >= 1 && data[j-1] > key) {
             data[j] = data[j-1];
             j--;
         }
